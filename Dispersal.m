@@ -18,7 +18,7 @@ tspan = [0,100];
 zeroinitial = zeros(p - 1, numpatches);
 y0 = [2; 0.001; 3; 1; 1; 1; zeroinitial(:)];
 
-%% Running function and finding phase difference %%
+%% Running function %%
 
 % Run ODE Solver and return time series
 opts = odeset('RelTol',1e-8,'AbsTol',1e-10, 'NonNegative', 1:numel(y0));
