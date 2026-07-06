@@ -1,0 +1,623 @@
+Two Patch Predator-Prey Model with distributed-delayed
+dispersal
+Barbara Gravel
+January 6, 2023
+
+1
+
+Introduction
+• importance of spatial synchrony of populations:
+Synchrony of populations abundances is an important phenomenon: synchronous fluctuations
+across vast spatial areas have been observed and the underlying causes are not yet fully understood.
+These large scale synchrony are important since they increase the risk of extinction when the
+abundance of the populations are low. Suppresses the ”rescue effect”.
+Two mechanisms have been hypothesized as the potential cause of synchrony: The Moran effect which describes the entrainment by external conditions such as weather and climate, and
+density dependent direct interaction between the populations, through dispersal of individuals.
+• The influence of dispersal on spatial synchrony has been previously studied:
+Populations can be synchronized by even a very small amount of dispersal.
+Rate of synchronization needs to be relatively fast which requires population to be either strongly
+coupled or weakly coupled populations following relaxation-like oscillations [2].
+• Synchronization has also been studied in the case of delayed dispersal: time delay includes the
+spatial component of the movement between patches.
+Travel-time was shown to have a strong impact on whether populations were able to synchronize
+or not. [7].
+• However, discrete delay approach assumes that all individuals disperse with a fixed travel-time,
+which is not very realistic in ecology where variation between individuals is essential.
+• The importance of heterogeneity in dispersal has also been an important research subject. reviewed by Colin Hawkes [3]
+Dispersal distances are found to have leptokurtic distributions and these distributions are thought
+to be caused by intra-specific variation.
+More realistic inclusion of dispersal in metapopulation models has a huge influence on the dynamics of populations [4].
+• We are interested in how individual variation in inter-patch movement might influence population synchrony.
+• Following Wall et al, we include movement behavior in a two patch Rozensweig-MacArthur model
+as a time delay but replacing the discrete delay by a distributed delay.
+
+1
+
+• Choose to model travel-time as a Gamma distribution:
+has been used before to explain the leptokurtic distribution of dispersal distance [8] and also for
+mathematical convenience.
+Gamma distribution is specified by only 2 parameters and allows to transform the distributed
+delay equations into ordinary differential equations [5].
+
+2
+
+Model and Methods
+
+2.1
+
+Ecological Model
+
+Following Wall et al. [7] we use a Rozensweig-MacArthur predator-prey model for single patch dynamics:
+
+
+H
+acP H
+dH
+= rH 1 −
+−
+dt
+K
+b+H
+dP
+aP H
+=
+− mP
+(1)
+dt
+b+H
+H(t) and P (t) represent the size of the prey and predator populations, respectively. Prey population
+follows a logistic growth with rate r and carrying capacity K. The loss of preys to predators follows a
+Holling type II function specified by parameters a and b and where the ratio of prey loss to increase
+in predators is c > 1. Predators grow according to the same Holling type II function and have linear
+mortality m.
+Following the approach by Wall et al [7], we consider the case of two identical and spatially discrete
+patches, each following (1) between which only preys disperse with a fixed dispersal rate D. Now, assume that each prey takes a finite time u to travel between the two patches, and that this time depends
+on individual movement characteristics of the dispersal process (such as speed or distance traveled in
+the landscape). Further assuming that there is no growth or mortality during inter-patch movement
+means that the number of preys arriving at time t in patch i is equal to the number of preys who left
+patch j at time t − u, where u belongs to a distribution of travel time. We therefore formulate the
+following two-patch predator prey model with distributed delay dispersal coupling:
+Z ∞
+
+
+
+dHi
+Hi
+acPi Hi
+= rHi 1 −
++D
+−
+Hj (t − u)k(u)ds − Hi (t)
+dt
+K
+b + Hi
+0
+dPi
+aPi Hi
+=
+− mPi
+i, j = 1, 2
+i 6= j
+(2)
+dt
+b + Hi
+We nondimensionalize the model using the following substitutions: hi = Hi /b, pi = (ac/rb)Pi , s = au,
+α = b/K, µ = m/a, ε = a/r, d = D/a and reusing t for scaled time at.
+We therefore work with the following equations:
+Z ∞
+
+dhi
+1
+pi hi
+= (hi (1 − αhi ) −
+)+d
+hj (t − s)k(s)ds − hi (t)
+dt
+ε
+1 + hi
+0
+dpi
+pi hi
+=
+− µpi
+i, j = 1, 2
+i 6= j
+(3)
+dt
+1 + hi
+R∞
+where k(s) is the kernel of the delay distribution and satisfies 0 k(s)ds = 1.
+Here, we choose to work with the Gamma distribution and therefore use k(s) = gap (s) where gap (u)
+is the kernel of the Gamma distribution, given by:
+gap (u) =
+
+ap up−1 e−au
+Γ(p)
+
+where Γ(p) is the gamma function, which for integer values of p is given by Γ(p) = (p − 1)!
+The Gamma distribution is convenient as it is specified by only two parameters: the shape p and
+the scale a. This distribution has been used to model dispersal travel-time before [8].
+2
+
+Figure 1: Probability density function of the Gamma distribution for different parameters. p is the
+shape parameter, τ the mean and σ 2 the variance.
+
+2.2
+
+The Linear Chain Technique
+
+The Linear Chain Technique, commonly known as ”Linear Chain Trick” [5, 6], allows to convert gammadistributed delays differential equations into ordinary differential equations. The Linear Chain Technique relies on the following property of the Gamma probability density function for integer values of
+k:
+d 1
+d
+g (u) =
+(ae−au ) = −aga1 (u)
+du a
+du
+d k
+d
+ga (u) =
+du
+du
+
+ga1 (0) = a
+
+(4)
+
+ k k−1 −au 
+a u
+e
+(k − 1)!
+
+
+ak
+(k − 1)uk−2 e−au − auk−1 e−au
+(k − 1)!
+
+ k−1 k−2
+ak uk−1 e−au
+a
+u
+−
+=a
+(k − 2)!
+(k − 1)!
+=
+
+= a(gak−1 (u) − gak (u))
+
+gak (0) = 0
+
+k>1
+
+(5)
+
+By working with only integer values of p, we can transform the distributed-delay differential equation model in (3) in an ordinary differential equation model.
+First, let’s define
+Z
+∞
+
+(k)
+
+hj (t − s)gak (s)ds
+
+yj (t) =
+
+for k = 1, 2, ..., p
+
+(6)
+
+0
+
+For k > 1 we have:
+d (k)
+d
+yj (t) =
+dt
+dt
+
+Z ∞
+
+d
+dt
+
+Z t
+
+=
+
+0
+
+−∞
+
+3
+
+
+hj (t − s)gak (s)ds
+
+hj (s)gak (t − s)ds
+
+(7)
+(8)
+
+Which using Leibniz rule and equation (5) becomes:
+
+Z t
+d
+d (k)
+k
+hj (s)ga (t − s)ds
+y (t) =
+dt j
+dt
+−∞
+Z t
+d
+hj (s) gak (t − s)ds
+= hj (t)gak (0) +
+dt
+−∞
+Z t
+=
+hj (s)a(gak−1 (t − s) − gak (t − s))ds
+−∞
+Z ∞
+hj (t − s)(gak−1 (s) − gak (s))ds
+=a
+0
+(k−1)
+
+= a(yj
+
+(k)
+
+− yj )
+
+for k > 1
+
+Similarly, we can derive what happens for k = 1 using equation (4):
+(1)
+
+dyj
+dt
+
+d
+=
+dt
+
+Z t
+
+
+
+hj (s)ga1 (t − s)ds
+
+−∞
+
+= hj (t)ga1 (0) +
+
+Z t
+hj (s)
+−∞
+
+d 1
+g (t − s)ds
+dt a
+
+Z t
+
+hj (s)(−a)ga1 (t − s)ds
+−∞
+(1)
+= a(hj (t) − yj (t))
+
+= ahj (t) +
+
+We can write these together as:
+(k)
+
+dyj
+(k−1)
+(k)
+= a(yj
+(t) − yj (t))
+dt
+(0)
+yj (t) = hj (t)
+
+for k = 1, 2, ..., p
+(9)
+
+Putting together equations (3), (6) and (9) we obtain the following system of ordinary differential equations:
+
+
+dhi
+1
+pi hi
+(p)
+= (hi (1 − αhi ) −
+) + d yj − hi (t)
+dt
+ε
+1 + hi
+pi hi
+dpi
+=
+− µpi
+i, j = 1, 2
+i 6= j
+dt
+1 + hi
+
+(10)
+
+(k)
+
+dyj
+(k−1)
+(k)
+= a(yj
+(t) − yj (t))
+dt
+(0)
+yj (t) = hj (t)
+
+2.3
+
+for k = 1, 2, ..., p
+
+Analysis of the ODE model
+
+Effects of Mean and Variance
+The model presented in (10) is a (4 + 2p)-dimensional model. We are interested in the effect of the
+distribution of delays on the synchronization of the two patches. We will characterize a distribution
+of delays by its mean τ and its variance σ 2 , which for a Gamma distribution with parameters p, a are
+given by: τ = ap and σ 2 = ap2 . Now, since we are using the linear chain trick, p needs to be an integer
+4
+
+and will determine the number of equations in the model. To investigate the effect of both mean and
+variance, it is more convenient to rewrite (8) in terms of p and τ :
+
+
+1
+pi hi
+dhi
+(p)
+= (hi (1 − αhi ) −
+) + d yj − hi (t)
+dt
+ε
+1 + hi
+dpi
+pi hi
+=
+− µpi
+i, j = 1, 2
+i 6= j
+dt
+1 + hi
+
+(11)
+
+(k)
+
+dyj
+p (k−1)
+(k)
+= (yj
+(t) − yj (t))
+dt
+τ
+(0)
+yj (t) = hj (t)
+
+for k = 1, 2, ..., p
+
+For a fixed integer-value of p, we can vary τ and look at what happens for delays that are Gamma2
+distributed with mean τ and variance σ 2 = τp . Repeating this for different values of p will then provide
+insight on the effect of the delay distribution in terms of both mean and variance.
+
+Analysis of Synchronization states in the ODE model
+Using the linear chain technique allowed us to convert the model with delay differential equations
+into a model with ordinary differential equations. We use the continuation software Matcont [1] to
+find the periodic orbits for specific p and τ values.
+The stability of a periodic orbit is determined by the associated Floquet multipliers mi , i = 1, ..., (4+
+2p) computed by the software. On a periodic orbit, there is always a multiplier m1 =1. The orbit is
+stable if |mi | < 1 for i = 2, ..., (4 + 2p) and unstable otherwise. Fixing p we can then vary τ to find the
+bifurcation points where periodic orbits gain or lose stability.
+We are interested in the α−µ−ε parameter region where the dynamics of the Rosenzweig-MacArthur
+model oscillate on a stable limit cycle. This happens when α < 1 and µ < 1−α
+1+α [2]. Moreover, we are interested in the region where these oscillations are relaxation-like, since this leads to faster convergence
+to synchrony. Here we focus on the parameter set α = 0.35, µ = 0.3 and ε = 0.1.
+
+Figure 2: Periodic orbits of the different synchronization regimes as time traces (top) and projection
+in the h1 − h2 plane (bottom) for p = 15, τ = 5 (a and d), p = 15τ = 1.5 (b and e) and p = 15, τ = 0.38 (c
+and f ).
+The system can exhibit three different phase-locking regimes for our parameter values, each corresponding to a different periodic orbit. We refer to the system as exhibiting In-Phase, Anti-Phase
+and Out-of-Phase synchrony when the solutions oscillate on periodic orbits with a phase difference
+5
+
+of φ = 0, φ = π and 0 < φ < π respectively. The shape of the stable periodic orbit in the h1 − h2 plane
+determines the phase-locked regime of the solutions (Fig. 2): A straight line (yellow orbit) means that
+h1 and h2 reach their maximum and minimum at the same time, i.e. that the oscillations are In-Phase
+synchronous. The blue orbit is shaped such that when h1 attains its maximum, h2 is at its minimum
+and vice-versa, which corresponds to Anti-Phase behavior. The third orbit (black) can take different
+shapes each corresponding to a specific phase difference between 0 and π.
+For our bifurcation analysis, we choose d = 0.001, which corresponds to a weak coupling strength
+[7].
+In a single-patch system with these parameters, the populations oscillate with period T = 7.34 [2].
+Since we assume no mortality during movement which means that travel-time is limited by individual
+lifetime, we decide to focus on varying the mean travel-time τ from 0 to T .
+
+3
+
+Results
+
+3.1
+
+Phase Locked States
+
+The mean delay and the variance strongly affects the number and stability of periodic orbits in the system. We find two periodic orbits present throughout the entire range of τ corresponding to Anti-Phase
+and In-Phase behavior (Fig. 3. As we vary τ from 0 to 7.34, these periodic orbits change in stability and
+an additional Out-of-Phase orbit is formed at Branch Points (red stars) and Fold bifurcation points
+(red dots).
+For each fixed p value, the variance changes quadratically with the mean τ (σ 2 = τ 2 /p). Therefore,
+for the full range of τ we obtain different ranges of variance for each p. We notice that the system’s
+behavior is similar for small τ values, with three bifurcation points common to all diagrams. However,
+for smaller variance σ 2 (i.e. higher p values), the system presents additional branch points at higher
+τ , at which the anti-phase orbit loses stability and the in-phase orbit eventually stabilizes again. This
+behavior is similar to what happens in the case of a discrete time delay [7], although the transition
+between phase-locking states appears to be smoother as there is no hysteresis or bi-stability.
+
+Figure 3: α = 0.35, µ = 0.3, ε = 0.1 and d = 0.001 Bifurcation Diagrams while varying τ over a full
+period of oscillations. The shape parameter for (a) p = 2, (b) p = 10, (c) p = 15, and (d) p = 15 with
+values of τ close to 0. Yellow, blue and black lines represent in-phase, anti-phase and out-of-phase
+periodic orbits respectively. Solid and dashed lines represent stable and unstable (saddle) periodic
+orbits respectively. Red stars and dots represent branch points of cycles and limit points of cycles
+respectively.
+
+6
+
+Additionally, our approach studying the full system gives us information about the changes in amplitude of the oscillations in the different synchronization regimes. We find that throughout the range
+of τ the changes are in the order of 0.05. The amplitude of the oscillations being around 2.15, these
+changes can be considered negligible.
+In order to understand the effect of individual variation in travel-time on patch synchronization,
+we visualize the different regions of phase-locking as a function of both τ and σ 2 (Fig. 4).
+
+2
+
+Figure 4: α = 0.35, µ = 0.3, ε = 0.1, d = 0.001. Stable phase-locked solutions on the curves σ 2 = τp ,
+for p = 1, 2, 3, 4, 5, 6, 8, 10, 12. Full range of τ on the left and τ = 0 to τ = 0.5 on the right. Dashed lines
+represent the case where two orbits are stable. The results for discrete delay (p = ∞, σ 2 = 0) are shown
+for comparison.
+We observe that for small mean delay τ , the stable phase-locked states are consistent with previous
+studies on synchronization by discrete time delay dispersal [7]. The range of delay for which the system can be synchronized by weak dispersal is not affected by small individual variation: The in-phase
+synchrony orbit loses stability for τ = 0.16 ± 0.02 from which point only Out-of-Phase dynamics are
+possible until τ = 0.42 ± 0.01 where the anti-phase orbit stabilizes.
+However, for higher τ values, we find that the variance has a strong influence on the stability of
+the phase-locked states. For high enough variation (σ 2 > 10), the system completely loses the ability to synchronize. Additionally, we notice that as the variance increases, the range of τ for which
+the in-phase periodic orbit is stable decreases. Overall, the region of the τ − σ 2 where the population abundances oscillate in phase appears to be small in comparison to the other synchronization
+regimes.
+
+3.2
+
+Convergence to Synchrony
+
+Computing the phase difference from simulations of the ordinary differential equations model 10, we
+can extract the rate of convergence to synchrony in the region where the solutions converge exponentially to the stable phase-locked orbit.
+Previous studies have shown that the rate of convergence to In-Phase synchrony is smaller than
+the rate of convergence to Anti-Phase synchrony [2] and that a time delay significantly affects the rate
+of convergence [7]. We are interested in how adding heterogeneity to the system compares to these
+results.
+7
+
+Figure 5: Rate of Convergence to stable periodic orbit as a function of the variance for different mean
+delays τ . Values of τ for which anti-phase is stable (a), bifurcations are present (b) and in-phase is
+stable (c).
+We find that for values of τ and σ 2 far enough from any bifurcation points, the rate of convergence
+decreases with increase in variance (Fig. 5 a and b). Moreover, it appears that the rate of convergence
+to In-phase is overall smaller than the rate of convergence to Anti-Phase.
+For high enough variance, rate of convergence to In-Phase synchrony is too small to be significant,
+while this is not the case for convergence to anti-phase.
+However, there are some limiting cases (see Figure 5b): because the rate of convergence is zero at
+any bifurcation points and that bifurcation points occur at different values of τ , the relationship between variance and rate of convergence is different when the mean delay is close to the bifurcation
+points. This makes comparison between small and large delays more complicated since the bifurcation points make the relationship between variance and rate of convergence non-monotonic.
+
+4
+
+Discussion
+• Introduce a mathematical technique that allows for a more convenient way to study distributeddelays. Distributed delays are useful to ecology since variation is an essential feature of populations.
+Gamma distribution is suitable to model travel-time.
+• Heterogeneity in the travel time leads to population persistence:
+High variance prevents synchronous behavior for small enough travel time and therefore reduces risk of extinction.
+High variance also decreases the rate of convergence to synchrony, meaning that for significant
+variation, dispersal is not likely to synchronize the patches.
+• Distributed time delay and patch dynamics:
+Allow to bring together important concepts in ecology: metapopulation ecology and patch dynamics, importance of landscape matrix and importance of heterogeneity in dispersal movement.
+
+8
+
+Appendix 1: Regular Oscillations
+To validate the results presented in section 4, we can make bifurcation diagrams using different sets of
+parameters α − µ − ε. Here we choose to investigate the case of α = 0.4, µ = 0.4, ε = 0.1 corresponding
+to regular oscillations in scenario (a) of Goldwynn and Hastings [2].
+
+2
+
+Figure 6: α = 0.4, µ = 0.4,  = 0.1, d = 0.001. Stable phase-locked solutions on the curves σ 2 = τp , for
+p = 1, 2, 3, 4, 5, 6, 8, 10, 12. for the full range of τ (a) and τ = 0 to τ = 0.5 (b).
+
+Appendix 2: Predators dispersing
+So far we have only considered the case where the preys are moving between the two patches. However, in many cases, the predators might also be dispersing and might be more likely to move in order
+to find food. Here we investigate the opposite case where predators only are dispersing and the preys
+stay in their respective patch.
+The nondimensionalized ODE model becomes:
+dhi
+1
+pi hi
+= (hi (1 − αhi ) −
+)
+dt
+ε
+1 + hi
+
+
+dpi
+pi hi
+(p)
+=
+− µpi + d yj − pi (t)
+dt
+1 + hi
+
+i, j = 1, 2
+
+i 6= j
+
+(12)
+
+(k)
+
+dyj
+p (k−1)
+(k)
+= (yj
+(t) − yj (t))
+dt
+τ
+(0)
+yj (t) = pj (t)
+
+for k = 1, 2, ..., p
+
+We choose the same parameters as for the prey dispersal case, ie α = 0.35, µ = 0.3, ε = 0.1, d = 0.001
+and vary both p and τ to get the bifurcation diagrams.
+
+9
+
+2
+
+Figure 7: α = 0.35, µ = 0.3,  = 0.1, d = 0.001. Stable phase-locked solutions on the curves σ 2 = τp , for
+p = 1, 2, 3, 4, 5, 6, 8, 10, 12. for the full range of τ (a) and τ = 0 to τ = 0.5 (b).
+
+References
+[1] A. Dhooge, W. Govaerts, Yu. A. Kuznetsov, H. G.E. Meijer, and B. Sautois. New features of the software matcont for bifurcation analysis of dynamical systems. Mathematical and Computer Modelling of Dynamical Systems, 14(2):147–175, 2008.
+[2] Eli E. Goldwyn and Alan Hastings. When can dispersal synchronize populations?
+Population Biology, 73(3):395 – 402, 2008.
+
+Theoretical
+
+[3] Colin Hawkes. Linking movement behaviour, dispersal and population processes: is individual
+variation a key? Journal of Animal Ecology, 78(5):894–906, 2009.
+[4] Simone K. Heinz, Christian Wissel, and Karin Frank. The viability of metapopulations: Individual
+dispersal behaviour matters. Landscape Ecology, 21(1):77–89, Jan 2006.
+[5] Norman. MacDonald. Biological delay systems : linear stability theory. Cambridge University Press,
+Cambridge [u.a.], 2008.
+[6] Hal Smith. Distributed Delay Equations and the Linear Chain Trick, pages 119–130. Springer New
+York, New York, NY, 2011.
+[7] Emily Wall, Frederic Guichard, and Antony R. Humphries. Synchronization in ecological systems
+by weak dispersal coupling with time delay. Theoretical Ecology, 6(4):405–418, Nov 2013.
+[8] K. Yamamura. Dispersal distance of heterogeneous populations. Population Ecology, 44(2):93–101,
+Aug 2002.
+
+10
+
+

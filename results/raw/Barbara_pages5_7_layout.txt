@@ -1,0 +1,130 @@
+and will determine the number of equations in the model. To investigate the effect of both mean and
+variance, it is more convenient to rewrite (8) in terms of p and τ :
+
+             dhi   1                 pi hi      
+                                                  (p)
+                                                            
+                 = (hi (1 − αhi ) −        ) + d yj − hi (t)
+              dt   ε                1 + hi
+             dpi    pi hi
+                 =        − µpi     i, j = 1, 2   i 6= j                                                (11)
+             dt    1 + hi
+                (k)
+             dyj     p (k−1)        (k)
+                   = (yj     (t) − yj (t))                                    for k = 1, 2, ..., p
+               dt    τ
+              (0)
+             yj (t) = hj (t)
+
+    For a fixed integer-value of p, we can vary τ and look at what happens for delays that are Gamma-
+                                               2
+distributed with mean τ and variance σ 2 = τp . Repeating this for different values of p will then provide
+insight on the effect of the delay distribution in terms of both mean and variance.
+
+Analysis of Synchronization states in the ODE model
+Using the linear chain technique allowed us to convert the model with delay differential equations
+into a model with ordinary differential equations. We use the continuation software Matcont [1] to
+find the periodic orbits for specific p and τ values.
+    The stability of a periodic orbit is determined by the associated Floquet multipliers mi , i = 1, ..., (4+
+2p) computed by the software. On a periodic orbit, there is always a multiplier m1 =1. The orbit is
+stable if |mi | < 1 for i = 2, ..., (4 + 2p) and unstable otherwise. Fixing p we can then vary τ to find the
+bifurcation points where periodic orbits gain or lose stability.
+    We are interested in the α−µ−ε parameter region where the dynamics of the Rosenzweig-MacArthur
+model oscillate on a stable limit cycle. This happens when α < 1 and µ < 1−α   1+α [2]. Moreover, we are in-
+terested in the region where these oscillations are relaxation-like, since this leads to faster convergence
+to synchrony. Here we focus on the parameter set α = 0.35, µ = 0.3 and ε = 0.1.
+
+
+
+
+Figure 2: Periodic orbits of the different synchronization regimes as time traces (top) and projection
+in the h1 − h2 plane (bottom) for p = 15, τ = 5 (a and d), p = 15τ = 1.5 (b and e) and p = 15, τ = 0.38 (c
+and f ).
+
+   The system can exhibit three different phase-locking regimes for our parameter values, each cor-
+responding to a different periodic orbit. We refer to the system as exhibiting In-Phase, Anti-Phase
+and Out-of-Phase synchrony when the solutions oscillate on periodic orbits with a phase difference
+
+                                                     5
+of φ = 0, φ = π and 0 < φ < π respectively. The shape of the stable periodic orbit in the h1 − h2 plane
+determines the phase-locked regime of the solutions (Fig. 2): A straight line (yellow orbit) means that
+h1 and h2 reach their maximum and minimum at the same time, i.e. that the oscillations are In-Phase
+synchronous. The blue orbit is shaped such that when h1 attains its maximum, h2 is at its minimum
+and vice-versa, which corresponds to Anti-Phase behavior. The third orbit (black) can take different
+shapes each corresponding to a specific phase difference between 0 and π.
+     For our bifurcation analysis, we choose d = 0.001, which corresponds to a weak coupling strength
+[7].
+     In a single-patch system with these parameters, the populations oscillate with period T = 7.34 [2].
+Since we assume no mortality during movement which means that travel-time is limited by individual
+lifetime, we decide to focus on varying the mean travel-time τ from 0 to T .
+
+
+3     Results
+3.1   Phase Locked States
+The mean delay and the variance strongly affects the number and stability of periodic orbits in the sys-
+tem. We find two periodic orbits present throughout the entire range of τ corresponding to Anti-Phase
+and In-Phase behavior (Fig. 3. As we vary τ from 0 to 7.34, these periodic orbits change in stability and
+an additional Out-of-Phase orbit is formed at Branch Points (red stars) and Fold bifurcation points
+(red dots).
+     For each fixed p value, the variance changes quadratically with the mean τ (σ 2 = τ 2 /p). Therefore,
+for the full range of τ we obtain different ranges of variance for each p. We notice that the system’s
+behavior is similar for small τ values, with three bifurcation points common to all diagrams. However,
+for smaller variance σ 2 (i.e. higher p values), the system presents additional branch points at higher
+τ , at which the anti-phase orbit loses stability and the in-phase orbit eventually stabilizes again. This
+behavior is similar to what happens in the case of a discrete time delay [7], although the transition
+between phase-locking states appears to be smoother as there is no hysteresis or bi-stability.
+
+
+
+
+Figure 3: α = 0.35, µ = 0.3, ε = 0.1 and d = 0.001 Bifurcation Diagrams while varying τ over a full
+period of oscillations. The shape parameter for (a) p = 2, (b) p = 10, (c) p = 15, and (d) p = 15 with
+values of τ close to 0. Yellow, blue and black lines represent in-phase, anti-phase and out-of-phase
+periodic orbits respectively. Solid and dashed lines represent stable and unstable (saddle) periodic
+orbits respectively. Red stars and dots represent branch points of cycles and limit points of cycles
+respectively.
+
+
+
+
+                                                    6
+    Additionally, our approach studying the full system gives us information about the changes in am-
+plitude of the oscillations in the different synchronization regimes. We find that throughout the range
+of τ the changes are in the order of 0.05. The amplitude of the oscillations being around 2.15, these
+changes can be considered negligible.
+    In order to understand the effect of individual variation in travel-time on patch synchronization,
+we visualize the different regions of phase-locking as a function of both τ and σ 2 (Fig. 4).
+
+
+
+
+                                                                                                              2
+Figure 4: α = 0.35, µ = 0.3, ε = 0.1, d = 0.001. Stable phase-locked solutions on the curves σ 2 = τp ,
+for p = 1, 2, 3, 4, 5, 6, 8, 10, 12. Full range of τ on the left and τ = 0 to τ = 0.5 on the right. Dashed lines
+represent the case where two orbits are stable. The results for discrete delay (p = ∞, σ 2 = 0) are shown
+for comparison.
+
+    We observe that for small mean delay τ , the stable phase-locked states are consistent with previous
+studies on synchronization by discrete time delay dispersal [7]. The range of delay for which the sys-
+tem can be synchronized by weak dispersal is not affected by small individual variation: The in-phase
+synchrony orbit loses stability for τ = 0.16 ± 0.02 from which point only Out-of-Phase dynamics are
+possible until τ = 0.42 ± 0.01 where the anti-phase orbit stabilizes.
+    However, for higher τ values, we find that the variance has a strong influence on the stability of
+the phase-locked states. For high enough variation (σ 2 > 10), the system completely loses the abil-
+ity to synchronize. Additionally, we notice that as the variance increases, the range of τ for which
+the in-phase periodic orbit is stable decreases. Overall, the region of the τ − σ 2 where the popula-
+tion abundances oscillate in phase appears to be small in comparison to the other synchronization
+regimes.
+
+3.2    Convergence to Synchrony
+Computing the phase difference from simulations of the ordinary differential equations model 10, we
+can extract the rate of convergence to synchrony in the region where the solutions converge exponen-
+tially to the stable phase-locked orbit.
+    Previous studies have shown that the rate of convergence to In-Phase synchrony is smaller than
+the rate of convergence to Anti-Phase synchrony [2] and that a time delay significantly affects the rate
+of convergence [7]. We are interested in how adding heterogeneity to the system compares to these
+results.
+
+
+                                                       7
+
