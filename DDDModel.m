@@ -1,5 +1,5 @@
-function DDDModel = DDDModel(t, z, alpha, mu, eps, d, numpatches, p, tau)
-%3DMODEL undefined
+function dzdt = DDDModel(~, z, alpha, mu, eps, d, numpatches, p, tau)
+%DDDMODEL Legacy two-patch form of Gravel's distributed-delay model.
 
     % z: vector of size numpatches (N) * 2 + N * p. First N numbers are preys in
     % patches N, Nth to 2Nth numbers are predators in patches in N, rest
@@ -15,8 +15,19 @@ function DDDModel = DDDModel(t, z, alpha, mu, eps, d, numpatches, p, tau)
 
     dydt = zeros(numpatches, p);
 
-    %Model
-    dNdt = 1 ./ eps * (h .* (1 - alpha .* h)) - h.*pred ./ (1 + h) + d .*  - d .* h;
+    if numpatches ~= 2
+        error('DDDModel:TwoPatchesOnly', ...
+            'Barbara Gravel''s model and this implementation use two patches.');
+    end
+    if tau <= 0
+        error('DDDModel:PositiveTau', 'tau must be positive in the chain model.');
+    end
+
+    % Equation (11): predation is inside the factor 1/epsilon, and arrivals
+    % are the last chain state belonging to the other patch.
+    arrivals = flipud(newy(:, end));
+    dNdt = (h .* (1 - alpha .* h) - h .* pred ./ (1 + h)) ./ eps + ...
+        d .* (arrivals - h);
     dPdt = h.*pred ./ (1 + h) - mu .* pred;
 
     %Terms derived from linear chain trick
@@ -31,5 +42,5 @@ function DDDModel = DDDModel(t, z, alpha, mu, eps, d, numpatches, p, tau)
     dydt = dydt(:);
 
     %Return
-    DDDModel = [dNdt; dPdt; dydt];
+    dzdt = [dNdt; dPdt; dydt];
 end
